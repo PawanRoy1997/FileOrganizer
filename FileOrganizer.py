@@ -1,5 +1,6 @@
 import os
 import glob
+from os.path import expanduser
 
 files_in_current_dir = glob.glob('*')
 file_extensions = set()
@@ -14,14 +15,14 @@ for file in files_in_current_dir:
 def create_directory():
     for extension in file_extensions:
         try:
-            os.mkdir(extension)
+            os.mkdir(expanduser("~")+"/Documents/"+extension)
         except FileExistsError:
             continue
 def arrangeFiles():
     for file in files_in_current_dir:
         fileExtension = file.split('.')[-1]
         try:
-            os.rename(file,fileExtension+"/"+file)
+            os.rename(file,expanduser("~")+"/Documents/"+fileExtension+"/"+file)
         except (OSError, IndexError):
             continue
 
